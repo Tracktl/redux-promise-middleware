@@ -1,0 +1,66 @@
+{
+  "name": "@tracktl/redux-promise-middleware",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Tracktl <﻿dev@tracktl.com> (https://app.tracktl.com/)",
+  "repository": "git@github.com:Tracktl/redux-promise-middleware.git",
+  "homepage": "https://github.com/Tracktl/redux-promise-middleware#readme",
+  "bugs": {
+    "url": "https://github.com/Tracktl/redux-promise-middleware/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepublish": "yarn build",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "lint-staged": {
+    "{*.{js,json},.babelrc}": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "eslint --fix --max-warnings 0",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "plugins": [
+      "prettier"
+    ],
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-babel-minify": "^3.1.2",
+    "rollup-plugin-replace": "^2.0.0"
+  },
+  "dependencies": {
+    "react": "^16.1.1"
+  }
+}
