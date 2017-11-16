@@ -17,31 +17,18 @@
     "test": "node test/test.js",
     "pretest": "npm run build"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "lint-staged": {
-    "{*.{js,json},.babelrc}": [
-      "prettier --write",
-      "git add"
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint --fix --max-warnings 0",
-      "git add"
-    ]
+    "{*.{js,json},.babelrc}": ["prettier --write", "git add"],
+    "src/**/*.{js,jsx}": ["eslint --fix --max-warnings 0", "git add"]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
   "eslintConfig": {
-    "plugins": [
-      "prettier"
-    ],
-    "extends": [
-      "airbnb-base",
-      "prettier"
-    ]
+    "plugins": ["prettier"],
+    "extends": ["airbnb-base", "prettier"]
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -60,7 +47,5 @@
     "rollup-plugin-babel-minify": "^3.1.2",
     "rollup-plugin-replace": "^2.0.0"
   },
-  "dependencies": {
-    "react": "^16.1.1"
-  }
+  "dependencies": {}
 }
