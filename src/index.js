@@ -1,26 +1,26 @@
 const checkAction = (types, metas, meta) => {
   // check `types`
   if (!Array.isArray(types) || types.length !== 3) {
-    throw new Error("Expected an array of three action types.");
+    throw new Error('Expected an array of three action types.');
   }
 
   if (
     !types.every(
       type =>
-        type === null || typeof type === "string" || typeof type === "object"
+        type === null || typeof type === 'string' || typeof type === 'object',
     )
   ) {
-    throw new Error("Expected action types to be strings, objects or null.");
+    throw new Error('Expected action types to be strings, objects or null.');
   }
 
   // check `metas`
   if (metas !== undefined && (!Array.isArray(metas) || metas.length !== 3)) {
-    throw new Error("Expected metas to be an array of three values.");
+    throw new Error('Expected metas to be an array of three values.');
   }
 
   // check `meta` confusion with `metas`
   if (Array.isArray(meta)) {
-    throw new Error("Expected `meta` to be an object.");
+    throw new Error('Expected `meta` to be an object.');
   }
 };
 
@@ -37,7 +37,7 @@ const callImplementation = (store, implementation, action, next) => {
       ...rest,
       ...typeData,
       type,
-      meta: typeMeta
+      meta: typeMeta,
     });
 
   if (PENDING !== null) {
@@ -48,16 +48,15 @@ const callImplementation = (store, implementation, action, next) => {
     SUCCESS &&
       (payload =>
         Promise.resolve(callAction(SUCCESS, successMeta, { payload })).then(
-          () => payload
+          () => payload,
         )),
     FAILURE &&
-      (error => {
+      (error =>
         Promise.resolve(callAction(FAILURE, failureMeta, { error })).then(
           () => {
             throw error;
-          }
-        );
-      })
+          },
+        )),
   );
 };
 
@@ -66,11 +65,11 @@ export default function promiseMiddleware(implementations) {
     if (action.promise === undefined) return next(action);
     const implementation = implementations.get(action.promise);
 
-    if (process.env.NODE_ENV !== "production" && !implementation) {
+    if (process.env.NODE_ENV !== 'production' && !implementation) {
       throw new Error(`Invalid promise value: "${action.promise}"`);
     }
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== 'production') {
       checkAction(action.types, action.metas, action.meta);
     }
 
