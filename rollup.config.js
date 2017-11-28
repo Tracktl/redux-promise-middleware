@@ -5,19 +5,22 @@
 import babel from 'rollup-plugin-babel';
 import minify from 'rollup-plugin-babel-minify';
 import replace from 'rollup-plugin-replace';
-import pkg from './package.json';
 
 const getPath = (format, env) => {
-  const path = `dist/${format}/${pkg.name}.${env}`;
+  const path = `dist/${format}/redux-promise-middleware.${env}`;
   if (env === 'production') return `${path}.min.js`;
-  return `${path}.js`
+  return `${path}.js`;
 };
 
 const createConfig = env => ({
   input: 'src/index.js',
   output: [
     { file: getPath('cjs', env), format: 'cjs' },
-    { file: getPath('umd', env), format: 'umd', name: 'reduxPromiseMiddleware' },
+    {
+      file: getPath('umd', env),
+      format: 'umd',
+      name: 'reduxPromiseMiddleware',
+    },
   ],
   plugins: [
     babel({
@@ -30,8 +33,4 @@ const createConfig = env => ({
   ].filter(Boolean),
 });
 
-
-export default [
-  createConfig('production'),
-  createConfig('development'),
-];
+export default [createConfig('production'), createConfig('development')];
