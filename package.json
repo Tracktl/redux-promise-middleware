@@ -18,7 +18,7 @@
     "test": "node test/test.js",
     "pretest": "yarn build",
     "lint": "eslint --ext .js,.jsx .",
-    "release": "standard-release"
+    "release": "standard-version"
   },
   "files": ["dist"],
   "lint-staged": {
