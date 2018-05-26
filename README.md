@@ -1,9 +1,14 @@
-# @tracktl/redux-promise-middleware
+# Redux Promise Middleware
+
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 
 ## Install
 
 > npm install --save @tracktl/redux-promise-middleware
 
+or
+
+> yarn add @tracktl/redux-promise-middleware
 ## Usage
 
 Create promise implementations:
