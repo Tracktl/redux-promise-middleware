@@ -10,17 +10,23 @@
   },
   "main": "index.js",
   "scripts": {
+    "prepare": "yarn build",
     "precommit": "lint-staged",
-    "prepublish":
-      "yarn lint && yarn build && yarn release && git push --follow-tags origin master",
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "node test/test.js",
+    "prepublishOnly": "yarn release && git push --follow-tags origin master",
+    "release": "standard-version",
     "pretest": "yarn build",
-    "lint": "eslint --ext .js,.jsx .",
-    "release": "standard-version"
+    "test": "node test/test.js",
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": "eslint --ext .js,.jsx ."
   },
   "files": ["dist"],
+  "standard-version": {
+    "scripts": {
+      "prerelease": "yarn lint",
+      "postbump": "prettier --write package.json"
+    }
+  },
   "lint-staged": {
     "{*.{js,json},.babelrc}": ["prettier --write", "git add"],
     "src/**/*.{js,jsx}": ["eslint --fix --max-warnings 0", "git add"]
