@@ -6,7 +6,7 @@ import {
   PromiseAction,
   ImplementationFn,
   Implementations,
-} from 'types';
+} from './types';
 
 const checkAction = (types: Types, metas?: Metas, meta?: any) => {
   // check `types`
@@ -102,4 +102,4 @@ export default function promise(implementations: Implementations) {
   return promiseMiddleware;
 }
 
-export * from 'types';
+export * from './types';
