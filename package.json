@@ -1,6 +1,6 @@
 {
   "name": "@tracktl/redux-promise-middleware",
-  "version": "0.2.0-beta.1",
+  "version": "0.2.0-beta.2",
   "license": "MIT",
   "author": "Tracktl <dev@tracktl.com> (https://app.tracktl.com/)",
   "repository": "git@github.com:Tracktl/redux-promise-middleware.git",
