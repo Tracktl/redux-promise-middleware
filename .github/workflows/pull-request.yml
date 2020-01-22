@@ -1,13 +1,6 @@
 name: Pull request
 
-on:
-  pull_request:
-    branches:
-      - master
-      - next
-      - beta
-      - alpha
-      - /^\d+\.(\d+|x)(\.x)?$/
+on: pull_request
 
 jobs:
   test:
