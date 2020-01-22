@@ -1,10 +1,9 @@
-import { AnyAction } from 'redux';
-import promiseMiddleware from '../src';
+import promiseMiddleware, { Implementations, ImplementationFn } from '../src';
 
-const implementations: any = new Map([
+const implementations: Implementations = new Map<string, ImplementationFn>([
   [
     'FAKE',
-    async ({ eventName, payload, data }: AnyAction) => {
+    async ({ eventName, payload, data }) => {
       if (process.env.NODE_ENV !== 'production') {
         if (typeof eventName !== 'string') {
           throw new Error('Expected eventName to be a string.');

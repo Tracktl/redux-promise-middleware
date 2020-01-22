@@ -1,6 +1,6 @@
 {
   "name": "@tracktl/redux-promise-middleware",
-  "version": "0.2.0",
+  "version": "0.0.0-development",
   "license": "MIT",
   "author": "Tracktl <dev@tracktl.com> (https://app.tracktl.com/)",
   "repository": "git@github.com:Tracktl/redux-promise-middleware.git",
@@ -21,13 +21,13 @@
     "build": "tsdx build --format=cjs,esm,umd",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "release": "standard-version",
-    "prepublishOnly": "yarn build && yarn release && git push --follow-tags origin master"
+    "semantic-release": "semantic-release"
   },
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "tsdx lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "prettier": {
@@ -37,14 +37,17 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "husky": "^3.0.5",
-    "prettier": "^1.18.2",
-    "redux": "^4.0.4",
-    "standard-version": "^7.0.0",
-    "tsdx": "^0.9.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/git": "^8.0.0",
+    "@types/jest": "^24.9.0",
+    "husky": "^4.2.0",
+    "redux": "^4.0.5",
+    "semantic-release": "^16.0.3",
+    "tsdx": "^0.12.3",
     "tslib": "^1.10.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.7.5"
   },
   "dependencies": {}
 }

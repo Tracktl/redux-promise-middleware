@@ -1,24 +1,12 @@
 import { Middleware, MiddlewareAPI, Dispatch, AnyAction } from 'redux';
-
-type Types = [string?, string?, string?];
-
-interface Meta {
-  [MetaImplementation: string]: {};
-}
-
-type Metas = [Meta?, Meta?, Meta?];
-
-interface PromiseAction extends AnyAction {
-  promise: string;
-  types: Types;
-  metas?: Metas;
-}
-
-interface ImplementationFn {
-  (action: AnyAction, getState: () => any): Promise<any>;
-}
-
-export interface Implementations extends Map<string, ImplementationFn> {}
+import {
+  Types,
+  Meta,
+  Metas,
+  PromiseAction,
+  ImplementationFn,
+  Implementations,
+} from 'types';
 
 const checkAction = (types: Types, metas?: Metas, meta?: any) => {
   // check `types`
@@ -52,19 +40,19 @@ const callImplementation = (
   action: PromiseAction,
   next: Dispatch,
 ) => {
-  const { types, metas = [], meta, ...rest } = action;
+  const { types, metas = [], meta: _, ...rest } = action;
 
   const promise = implementation(rest, store.getState);
 
   const [PENDING, SUCCESS, FAILURE] = types;
   const [pendingMeta, successMeta, failureMeta] = metas;
 
-  const callAction = (type: string, typeMeta?: {}, typeData?: {}) =>
+  const callAction = (type: string, meta?: Meta, data?: {}) =>
     next({
       ...rest,
-      ...typeData,
+      ...data,
       type,
-      meta: typeMeta,
+      meta,
     });
 
   if (PENDING) {
@@ -94,7 +82,9 @@ export default function promise(implementations: Implementations) {
   const promiseMiddleware: Middleware = (store: MiddlewareAPI) => (
     next: Dispatch,
   ) => (action: PromiseAction) => {
-    if (action.promise === undefined) return next(action);
+    if (action.promise === undefined) {
+      return next((action as unknown) as AnyAction);
+    }
 
     const implementation = implementations.get(action.promise);
 
@@ -111,3 +101,5 @@ export default function promise(implementations: Implementations) {
 
   return promiseMiddleware;
 }
+
+export * from 'types';
