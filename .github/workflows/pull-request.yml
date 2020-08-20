@@ -1,12 +1,6 @@
 name: Pull request
 
-on:
-  pull_request:
-    branches:
-      - master
-      - next
-      - beta
-      - alpha
+on: pull_request
 
 jobs:
   test:
@@ -14,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2-beta
         with:
           node-version: 12
       - name: Install dependencies
